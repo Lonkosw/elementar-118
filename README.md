@@ -91,19 +91,25 @@ A galeria completa está em [`prototipos/index.html`](prototipos/index.html).
 
 ### Levando para o Figma
 
-Os protótipos são HTML/CSS em [`prototipo/`](prototipo). Há dois caminhos para levá-los ao Figma:
+As **telas principais** (menu, gameplay e ranking, em desktop e celular) estão em
+[`prototipos/figma/`](prototipos/figma) como SVG. Para usar:
 
-1. **Como imagem:** arraste os PNGs de `prototipos/` para o Figma, um frame por tela.
-2. **Editável:** instale o plugin **html.to.design** no Figma e importe cada tela abrindo
-   `prototipo/prototipo.html?tela=<nome>&disp=desktop` (ou `disp=mobile`). As telas viram
-   camadas editáveis.
+1. Crie um arquivo no Figma com a fonte **Mitr** disponível (ela já vem nas Google Fonts do Figma).
+2. Arraste os 6 arquivos `.svg` para o canvas. Cada um vira um frame com retângulos, textos e
+   ícones **editáveis**.
+3. Opcional: renomeie os frames para `Desktop / Menu`, `Mobile / Gameplay` etc.
 
+Para gerar os SVGs de novo depois de mudar o protótipo: `cd prototipo && node exportar-svg.mjs`.
+
+As outras telas (modais de instruções, pausa, vitória, derrota, conquistas etc.) estão como PNG
+em `prototipos/desktop` e `prototipos/mobile`. Também dá para importá-las editáveis com o plugin
+**html.to.design**, abrindo `prototipo/prototipo.html?tela=<nome>&disp=desktop` (ou `disp=mobile`).
 Os nomes das telas (`menu`, `como-jogar`, `nova-partida`, `jogo`, `jogo-erro`, `jogo-repetido`,
 `jogo-combo`, `jogo-facil`, `jogo-ultimo-minuto`, `pausa`, `confirmar-desistir`, `vitoria`,
 `derrota`, `sem-vidas`, `ranking`, `conquistas`, `config` e `multiplayer`) estão em
 `prototipo/telas.js`. Acrescente `&tema=claro` para o tema claro.
 
-Para gerar as imagens de novo: `cd prototipo && node gerar-imagens.mjs` (precisa do `playwright`).
+Para gerar os PNGs de novo: `cd prototipo && node gerar-imagens.mjs` (precisa do `playwright`).
 
 ### Paleta
 
@@ -135,8 +141,9 @@ elementar/
 ├── prototipo/                 protótipo HTML/CSS das telas
 │   ├── elementos.js           os 118 elementos (nome PT-BR, símbolo, posição, sinônimos)
 │   ├── telas.js / prototipo.css / prototipo.html
-│   └── gerar-imagens.mjs
-└── prototipos/                imagens exportadas (desktop e mobile)
+│   ├── gerar-imagens.mjs      gera os PNGs
+│   └── exportar-svg.mjs       gera os SVGs editáveis para o Figma
+└── prototipos/                imagens exportadas (desktop, mobile e figma/)
 ```
 
 `prototipo/elementos.js` já traz os dados e a função `normalizar()`, que podem ser reaproveitados
