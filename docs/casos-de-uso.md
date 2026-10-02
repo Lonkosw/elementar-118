@@ -2,8 +2,7 @@
 
 ![Diagrama de casos de uso](casos-de-uso.png)
 
-Fonte editável: [`casos-de-uso.puml`](casos-de-uso.puml) (PlantUML). A imagem também é gerada por
-[`gerar-diagrama.py`](gerar-diagrama.py).
+Diagrama feito no Visual Paradigm. Versão em texto: [`casos-de-uso.puml`](casos-de-uso.puml) (PlantUML).
 
 Ator único: **Jogador**.
 

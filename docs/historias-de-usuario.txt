@@ -4,7 +4,7 @@ Equipe: Theo Simão Lonkoski e Heloyse Angelina Ferreira
 
 Formato: Como <ator>, quero <ação> para <benefício>.
 Cada história vem de um caso de uso do diagrama e vira um cartão no Trello (Kanban).
-Prioridade: OBRIGATÓRIO = pedido na especificação | EXTRA = pontuação adicional.
+Prioridade: OBRIGATÓRIO = pedido na especificação | EXTRA = vale nota adicional na avaliação.
 
 Regras do jogo: digitar nomes de elementos até completar a tabela (118/118) ou o tempo acabar.
 Não há vidas nem pontos. O placar é o número de acertos (x/118).
@@ -13,7 +13,7 @@ Ranking: mais acertos primeiro; empate, quem terminou em menos tempo.
 
 ==================================================================
 
-CASO 1 - UC01 Consultar instruções
+CASO 1 - UC01 Consultar instruções (HU01)
 Prioridade: OBRIGATÓRIO
 História: Como jogador, quero ler como o jogo funciona para saber o que fazer antes de começar.
 Critérios de aceitação:
@@ -23,7 +23,7 @@ Critérios de aceitação:
 
 ------------------------------------------------------------------
 
-CASO 2 - UC02 Iniciar partida
+CASO 2 - UC02 Iniciar partida (HU02)
 Prioridade: OBRIGATÓRIO
 História: Como jogador, quero iniciar uma partida pelo menu para começar a jogar rapidamente.
 Critérios de aceitação:
@@ -33,7 +33,7 @@ Critérios de aceitação:
 
 ------------------------------------------------------------------
 
-CASO 3 - UC03 Selecionar dificuldade
+CASO 3 - UC03 Selecionar dificuldade (HU03)
 Prioridade: EXTRA
 História: Como jogador, quero escolher a dificuldade para o desafio combinar com o que eu sei.
 Critérios de aceitação:
@@ -42,7 +42,7 @@ Critérios de aceitação:
 
 ------------------------------------------------------------------
 
-CASO 4 - UC04 Jogar partida
+CASO 4 - UC04 Jogar partida (HU04)
 Prioridade: OBRIGATÓRIO
 História: Como jogador, quero digitar nomes de elementos e ver a tabela se completar para acompanhar meu progresso.
 Critérios de aceitação:
@@ -52,7 +52,7 @@ Critérios de aceitação:
 
 ------------------------------------------------------------------
 
-CASO 5 - UC05 Validar resposta
+CASO 5 - UC05 Validar resposta (HU05)
 Prioridade: OBRIGATÓRIO
 História: Como jogador, quero que o jogo entenda o que eu digitei mesmo sem acento para não ser punido por digitação.
 Critérios de aceitação:
@@ -60,10 +60,11 @@ Critérios de aceitação:
 - Acertou: a casa acende com símbolo e nome e aparece "+1 Acertou!".
 - Já digitado: a casa pisca e aparece "já está na tabela".
 - Não existe: o campo treme e aparece "Esse elemento não existe".
+- Toda validação atualiza o placar (inclui o Caso 6).
 
 ------------------------------------------------------------------
 
-CASO 6 - UC06 Atualizar placar
+CASO 6 - UC06 Atualizar placar (HU06)
 Prioridade: OBRIGATÓRIO
 História: Como jogador, quero ver tempo e acertos o tempo todo para saber como estou indo.
 Critérios de aceitação:
@@ -74,7 +75,7 @@ Critérios de aceitação:
 
 ------------------------------------------------------------------
 
-CASO 7 - UC07 Pausar partida
+CASO 7 - UC07 Pausar partida (HU07)
 Prioridade: OBRIGATÓRIO (recomendado)
 História: Como jogador, quero pausar a partida para sair um momento sem perder tempo.
 Critérios de aceitação:
@@ -83,7 +84,7 @@ Critérios de aceitação:
 
 ------------------------------------------------------------------
 
-CASO 8 - UC08 Desistir da partida
+CASO 8 - UC08 Desistir da partida (HU08)
 Prioridade: OBRIGATÓRIO
 História: Como jogador, quero desistir para ver as respostas quando não lembrar de mais nada.
 Critérios de aceitação:
@@ -92,7 +93,7 @@ Critérios de aceitação:
 
 ------------------------------------------------------------------
 
-CASO 9 - UC09 Encerrar partida
+CASO 9 - UC09 Encerrar partida (HU09)
 Prioridade: OBRIGATÓRIO
 História: Como jogador, quero ver o resultado ao final para saber se venci e o que faltou.
 Critérios de aceitação:
@@ -104,7 +105,7 @@ Critérios de aceitação:
 
 ------------------------------------------------------------------
 
-CASO 10 - UC10 Consultar ranking
+CASO 10 - UC10 Consultar ranking (HU10)
 Prioridade: OBRIGATÓRIO
 História: Como jogador, quero ver os melhores resultados para comparar com os meus e os de amigos.
 Critérios de aceitação:
@@ -115,7 +116,7 @@ Critérios de aceitação:
 
 ------------------------------------------------------------------
 
-CASO 11 - UC11 Consultar conquistas
+CASO 11 - UC11 Consultar conquistas (HU11)
 Prioridade: EXTRA
 História: Como jogador, quero ver minhas conquistas para saber o que já desbloqueei e o que falta.
 Critérios de aceitação:
@@ -124,7 +125,7 @@ Critérios de aceitação:
 
 ------------------------------------------------------------------
 
-CASO 12 - UC12 Desbloquear conquista
+CASO 12 - UC12 Desbloquear conquista (HU12)
 Prioridade: EXTRA
 História: Como jogador, quero desbloquear conquistas durante a partida para ter objetivos além do ranking.
 Critérios de aceitação:
@@ -134,7 +135,7 @@ Critérios de aceitação:
 
 ------------------------------------------------------------------
 
-CASO 13 - UC13 Salvar resultado
+CASO 13 - UC13 Salvar resultado (HU13)
 Prioridade: OBRIGATÓRIO
 História: Como jogador, quero que meus resultados fiquem salvos para aparecerem no ranking depois.
 Critérios de aceitação:
@@ -143,16 +144,16 @@ Critérios de aceitação:
 
 ------------------------------------------------------------------
 
-CASO 14 - UC14 Jogar novamente
+CASO 14 - UC14 Jogar novamente (HU14)
 Prioridade: OBRIGATÓRIO
-História: Como jogador, quero jogar de novo ou voltar ao menu sem recarregar a página.
+História: Como jogador, quero jogar de novo ou voltar ao menu sem recarregar a página para treinar mais sem perder tempo.
 Critérios de aceitação:
 - O resultado final tem os botões "Jogar novamente" (mesmas configurações) e "Menu".
 - O jogo é zerado sem recarregar a página.
 
 ==================================================================
 
-REQUISITO NÃO FUNCIONAL - Responsividade
+REQUISITO NÃO FUNCIONAL - Responsividade (HU15)
 Prioridade: OBRIGATÓRIO
 História: Como jogador, quero jogar pelo celular para jogar em qualquer lugar.
 Critérios de aceitação:

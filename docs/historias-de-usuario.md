@@ -1,7 +1,11 @@
 # Histórias de usuário
 
+Equipe: Theo Simão Lonkoski e Heloyse Angelina Ferreira
+
 Formato: *Como jogador, quero … para …*, com critérios de aceitação. Cada história vem de um
-caso de uso ([casos-de-uso.md](casos-de-uso.md)). Versão em texto: [historias-de-usuario.txt](historias-de-usuario.txt).
+caso de uso do diagrama ([casos-de-uso.md](casos-de-uso.md)) e vira um cartão no Trello (Kanban).
+Prioridade: **Obrigatório** = pedido na especificação; **Extra** = vale nota adicional na avaliação.
+Versão em texto: [historias-de-usuario.txt](historias-de-usuario.txt).
 
 Regras: sem vidas e sem pontos; o placar é o número de acertos (x/118). A dificuldade muda só o tempo
 (Fácil 15:00, Normal 12:00, Difícil 10:00). Ranking por acertos; no empate, menor tempo.
@@ -35,6 +39,7 @@ Como jogador, quero que o jogo entenda o que eu digitei mesmo sem acento para n�
 - [ ] Acertou: a casa acende com símbolo e nome e aparece "+1 Acertou!".
 - [ ] Já digitado: a casa pisca e aparece "já está na tabela".
 - [ ] Não existe: o campo treme e aparece "Esse elemento não existe".
+- [ ] Toda validação atualiza o placar (inclui o Caso 6).
 
 ### HU06 · Atualizar placar (UC06) · Obrigatório
 Como jogador, quero ver tempo e acertos o tempo todo para saber como estou indo.
@@ -85,7 +90,7 @@ Como jogador, quero que meus resultados fiquem salvos para aparecerem no ranking
 - [ ] Os dados continuam lá depois de fechar e abrir o navegador.
 
 ### HU14 · Jogar novamente (UC14) · Obrigatório
-Como jogador, quero jogar de novo ou voltar ao menu sem recarregar a página.
+Como jogador, quero jogar de novo ou voltar ao menu sem recarregar a página para treinar mais sem perder tempo.
 - [ ] O resultado final tem os botões "Jogar novamente" (mesmas configurações) e "Menu".
 - [ ] O jogo é zerado sem recarregar a página.
 

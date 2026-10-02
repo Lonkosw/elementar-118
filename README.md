@@ -55,23 +55,22 @@ Os protótipos oficiais são as 3 telas abaixo, em desktop e celular
 Visual: fundo preto com textura, verde dos quadrados de elemento e neon ao passar o mouse.
 Fonte **Mitr** (Google Fonts).
 
-As versões anteriores ficam como material de apoio em `prototipos/final`, `prototipos/desktop`
-e `prototipos/mobile`.
-
 ## Estrutura
 
 ```
 elementar-118/
 ├── README.md
 ├── docs/
-│   ├── casos-de-uso.png/.svg   diagrama de casos de uso
-│   ├── casos-de-uso.puml       fonte PlantUML
+│   ├── casos-de-uso.png        diagrama de casos de uso (Visual Paradigm)
+│   ├── casos-de-uso.puml       mesmo diagrama em PlantUML
 │   ├── casos-de-uso.md         include/extend justificados e descrição dos casos
 │   ├── historias-de-usuario.md / .txt
-│   └── gerar-diagrama.py
-├── prototipo-neon/             protótipo visual navegável (oficial)
-├── prototipo/                  protótipo HTML anterior + elementos.js
-└── prototipos/                 imagens (neon = oficial)
+│   └── kanban-trello.md        planejamento por história
+├── prototipo-neon/             protótipo visual navegável (3 telas)
+├── prototipos/
+│   └── neon/                   PNGs das 3 telas em desktop e celular
+└── prototipo/
+    └── elementos.js            dados dos 118 elementos
 ```
 
 `prototipo/elementos.js` traz os 118 elementos e a função `normalizar()`, que serão reaproveitados

@@ -1,10 +1,10 @@
 @startuml
-' Mesmo diagrama de docs/casos-de-uso.png, em PlantUML
+' Mesmo diagrama de docs/casos-de-uso.png (Visual Paradigm), em PlantUML
 left to right direction
 skinparam usecase { BackgroundColor #e6f4f1 }
 actor Jogador
 
-rectangle "ELEMENTAR 118 — jogo da tabela periódica" {
+rectangle "ELEMENTAR 118" {
   usecase "UC01 Consultar instruções" as UC01
   usecase "UC02 Iniciar partida" as UC02
   usecase "UC03 Selecionar dificuldade" as UC03
@@ -13,7 +13,7 @@ rectangle "ELEMENTAR 118 — jogo da tabela periódica" {
   usecase "UC06 Atualizar placar" as UC06
   usecase "UC07 Pausar partida" as UC07
   usecase "UC08 Desistir da partida" as UC08
-  usecase "UC09 Encerrar partida\n(vitória / derrota)" as UC09
+  usecase "UC09 Encerrar partida" as UC09
   usecase "UC10 Consultar ranking" as UC10
   usecase "UC11 Consultar conquistas" as UC11
   usecase "UC12 Desbloquear conquista" as UC12
