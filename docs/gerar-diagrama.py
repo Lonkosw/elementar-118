@@ -2,43 +2,40 @@
 # Uso: python3 docs/gerar-diagrama.py
 import math, os
 
-W, H = 1240, 900
+W, H = 1240, 860
 RX, RY = 112, 34
 C1, C2, C3 = 390, 720, 1040
 
 casos = {
   'instr':  (C1, 110, 'UC01 Consultar', 'instruções'),
   'inic':   (C1, 230, 'UC02 Iniciar', 'partida'),
-  'jogar':  (C1, 400, 'UC05 Jogar', 'partida'),
-  'rank':   (C1, 620, 'UC11 Consultar', 'ranking'),
-  'config': (C1, 720, 'UC12 Configurar', 'preferências'),
-  'conq':   (C1, 820, 'UC13 Consultar', 'conquistas'),
-  'dupla':  (C2, 110, 'UC04 Jogar em dupla', '(multiplayer local)'),
+  'jogar':  (C1, 400, 'UC04 Jogar', 'partida'),
+  'rank':   (C1, 620, 'UC10 Consultar', 'ranking'),
+  'conq':   (C1, 750, 'UC11 Consultar', 'conquistas'),
   'dific':  (C2, 230, 'UC03 Selecionar', 'dificuldade'),
-  'valid':  (C2, 340, 'UC06 Validar', 'resposta'),
-  'pausa':  (C2, 440, 'UC08 Pausar', 'partida'),
-  'desist': (C2, 530, 'UC09 Desistir', 'da partida'),
-  'encer':  (C2, 650, 'UC10 Encerrar partida', '(vitória / derrota)'),
-  'pontos': (C3, 230, 'UC07 Atualizar', 'pontuação'),
-  'conqd':  (C3, 380, 'UC14 Desbloquear', 'conquista'),
-  'salvar': (C3, 650, 'UC15 Salvar', 'pontuação'),
-  'nov':    (C3, 780, 'UC16 Jogar', 'novamente'),
+  'valid':  (C2, 340, 'UC05 Validar', 'resposta'),
+  'pausa':  (C2, 440, 'UC07 Pausar', 'partida'),
+  'desist': (C2, 530, 'UC08 Desistir', 'da partida'),
+  'encer':  (C2, 650, 'UC09 Encerrar partida', '(vitória / derrota)'),
+  'placar': (C3, 230, 'UC06 Atualizar', 'placar'),
+  'conqd':  (C3, 380, 'UC12 Desbloquear', 'conquista'),
+  'salvar': (C3, 650, 'UC13 Salvar', 'resultado'),
+  'nov':    (C3, 780, 'UC14 Jogar', 'novamente'),
 }
 
 # (origem, destino, tipo). include: base -> incluído. extend: extensão -> base.
 relacoes = [
   ('inic', 'dific', 'include'),
-  ('dupla', 'inic', 'extend'),
   ('jogar', 'valid', 'include'),
-  ('valid', 'pontos', 'include'),
-  ('conqd', 'valid', 'extend'),
-  ('pausa', 'jogar', 'extend'),
-  ('desist', 'jogar', 'extend'),
+  ('valid', 'placar', 'include'),
   ('jogar', 'encer', 'include'),
   ('encer', 'salvar', 'include'),
+  ('pausa', 'jogar', 'extend'),
+  ('desist', 'jogar', 'extend'),
+  ('conqd', 'valid', 'extend'),
   ('nov', 'encer', 'extend'),
 ]
-ator_liga = ['instr', 'inic', 'jogar', 'rank', 'config', 'conq']
+ator_liga = ['instr', 'inic', 'jogar', 'rank', 'conq']
 AX, AY = 90, 450
 
 def borda(cx, cy, tx, ty):

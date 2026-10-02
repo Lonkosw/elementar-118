@@ -1,0 +1,160 @@
+ELEMENTAR 118 - HISTÓRIAS DE USUÁRIO
+Análise e Projeto de Sistemas (TI23L) - UTFPR Campo Mourão - 2º semestre/2026
+Equipe: Theo Simão Lonkoski e Heloyse Angelina Ferreira
+
+Formato: Como <ator>, quero <ação> para <benefício>.
+Cada história vem de um caso de uso do diagrama e vira um cartão no Trello (Kanban).
+Prioridade: OBRIGATÓRIO = pedido na especificação | EXTRA = pontuação adicional.
+
+Regras do jogo: digitar nomes de elementos até completar a tabela (118/118) ou o tempo acabar.
+Não há vidas nem pontos. O placar é o número de acertos (x/118).
+Dificuldade muda só o tempo: Fácil 15:00, Normal 12:00, Difícil 10:00.
+Ranking: mais acertos primeiro; empate, quem terminou em menos tempo.
+
+==================================================================
+
+CASO 1 - UC01 Consultar instruções
+Prioridade: OBRIGATÓRIO
+História: Como jogador, quero ler como o jogo funciona para saber o que fazer antes de começar.
+Critérios de aceitação:
+- O menu mostra o nome do jogo, uma frase de apresentação e o botão "Como jogar".
+- As instruções explicam as respostas possíveis (acertou, já digitado, não existe) e quando a partida acaba.
+- As instruções fecham pelo X, por "Entendi" ou pela tecla Esc.
+
+------------------------------------------------------------------
+
+CASO 2 - UC02 Iniciar partida
+Prioridade: OBRIGATÓRIO
+História: Como jogador, quero iniciar uma partida pelo menu para começar a jogar rapidamente.
+Critérios de aceitação:
+- "Iniciar jogo" pede o nome do jogador (lembra o último nome usado).
+- Ao começar, a tabela aparece em branco, o cronômetro começa a correr e o cursor já fica no campo de resposta.
+- Sempre passa pela escolha de dificuldade (inclui o Caso 3).
+
+------------------------------------------------------------------
+
+CASO 3 - UC03 Selecionar dificuldade
+Prioridade: EXTRA
+História: Como jogador, quero escolher a dificuldade para o desafio combinar com o que eu sei.
+Critérios de aceitação:
+- Fácil: 15:00. Normal (já vem selecionado): 12:00. Difícil: 10:00.
+- A dificuldade escolhida aparece no topo durante a partida.
+
+------------------------------------------------------------------
+
+CASO 4 - UC04 Jogar partida
+Prioridade: OBRIGATÓRIO
+História: Como jogador, quero digitar nomes de elementos e ver a tabela se completar para acompanhar meu progresso.
+Critérios de aceitação:
+- Enter ou o botão envia a resposta e limpa o campo.
+- A partida continua até completar 118/118 ou o tempo zerar.
+- Toda resposta passa pela validação (inclui o Caso 5).
+
+------------------------------------------------------------------
+
+CASO 5 - UC05 Validar resposta
+Prioridade: OBRIGATÓRIO
+História: Como jogador, quero que o jogo entenda o que eu digitei mesmo sem acento para não ser punido por digitação.
+Critérios de aceitação:
+- Acentos, maiúsculas e espaços são ignorados (helio = Hélio) e sinônimos são aceitos (ex.: Azoto, Volfrâmio).
+- Acertou: a casa acende com símbolo e nome e aparece "+1 Acertou!".
+- Já digitado: a casa pisca e aparece "já está na tabela".
+- Não existe: o campo treme e aparece "Esse elemento não existe".
+
+------------------------------------------------------------------
+
+CASO 6 - UC06 Atualizar placar
+Prioridade: OBRIGATÓRIO
+História: Como jogador, quero ver tempo e acertos o tempo todo para saber como estou indo.
+Critérios de aceitação:
+- O topo mostra tempo restante, acertos (x/118) e dificuldade.
+- Cada acerto soma +1 no contador.
+- A cada 10 acertos aparece a mensagem "Subiu de nível!".
+- Com menos de 1 minuto, o cronômetro muda de cor e aparece um aviso.
+
+------------------------------------------------------------------
+
+CASO 7 - UC07 Pausar partida
+Prioridade: OBRIGATÓRIO (recomendado)
+História: Como jogador, quero pausar a partida para sair um momento sem perder tempo.
+Critérios de aceitação:
+- O botão Pausar ou Esc para o cronômetro e esconde a tabela.
+- A pausa tem Continuar, Reiniciar e Voltar ao menu.
+
+------------------------------------------------------------------
+
+CASO 8 - UC08 Desistir da partida
+Prioridade: OBRIGATÓRIO
+História: Como jogador, quero desistir para ver as respostas quando não lembrar de mais nada.
+Critérios de aceitação:
+- Desistir pede confirmação.
+- Ao confirmar, a partida termina como derrota e o resultado vai para o ranking.
+
+------------------------------------------------------------------
+
+CASO 9 - UC09 Encerrar partida
+Prioridade: OBRIGATÓRIO
+História: Como jogador, quero ver o resultado ao final para saber se venci e o que faltou.
+Critérios de aceitação:
+- Vitória: com 118/118 aparece "Tabela completa!" com acertos e tempo usado.
+- Derrota: quando o tempo zera ou o jogador desiste, aparece "Fim de jogo" com o motivo.
+- Na derrota, os elementos que faltaram aparecem destacados na tabela.
+- Se for o melhor resultado do jogador, aparece "Novo recorde!".
+- Todo resultado é salvo (inclui o Caso 13).
+
+------------------------------------------------------------------
+
+CASO 10 - UC10 Consultar ranking
+Prioridade: OBRIGATÓRIO
+História: Como jogador, quero ver os melhores resultados para comparar com os meus e os de amigos.
+Critérios de aceitação:
+- O menu tem o botão "Ranking".
+- O ranking mostra o top 10 com abas Fácil, Normal e Difícil.
+- Colunas: posição, jogador, acertos (x/118), tempo e data.
+- Ordem: mais acertos; empate, menor tempo. A última partida aparece destacada.
+
+------------------------------------------------------------------
+
+CASO 11 - UC11 Consultar conquistas
+Prioridade: EXTRA
+História: Como jogador, quero ver minhas conquistas para saber o que já desbloqueei e o que falta.
+Critérios de aceitação:
+- A tela lista todas as conquistas; as bloqueadas aparecem com cadeado.
+- Cada conquista mostra o nome e como desbloquear.
+
+------------------------------------------------------------------
+
+CASO 12 - UC12 Desbloquear conquista
+Prioridade: EXTRA
+História: Como jogador, quero desbloquear conquistas durante a partida para ter objetivos além do ranking.
+Critérios de aceitação:
+- Exemplos: Gases nobres (coluna 18 completa), Metais alcalinos (coluna 1), Relâmpago (10 acertos em 30 s), Mendeleiev (tabela completa).
+- O desbloqueio aparece na hora e no resultado final.
+- A conquista fica salva no localStorage.
+
+------------------------------------------------------------------
+
+CASO 13 - UC13 Salvar resultado
+Prioridade: OBRIGATÓRIO
+História: Como jogador, quero que meus resultados fiquem salvos para aparecerem no ranking depois.
+Critérios de aceitação:
+- Toda partida encerrada grava nome, acertos, tempo usado, dificuldade e data no localStorage.
+- Os dados continuam lá depois de fechar e abrir o navegador.
+
+------------------------------------------------------------------
+
+CASO 14 - UC14 Jogar novamente
+Prioridade: OBRIGATÓRIO
+História: Como jogador, quero jogar de novo ou voltar ao menu sem recarregar a página.
+Critérios de aceitação:
+- O resultado final tem os botões "Jogar novamente" (mesmas configurações) e "Menu".
+- O jogo é zerado sem recarregar a página.
+
+==================================================================
+
+REQUISITO NÃO FUNCIONAL - Responsividade
+Prioridade: OBRIGATÓRIO
+História: Como jogador, quero jogar pelo celular para jogar em qualquer lugar.
+Critérios de aceitação:
+- Funciona no desktop e se adapta ao celular a partir de 360 px de largura.
+- No celular, só a tabela rola para o lado; o restante da tela não.

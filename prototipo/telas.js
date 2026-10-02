@@ -372,6 +372,58 @@ const TELAS = {
   },
 };
 
+// ---------- Versão final (3 telas: sem vidas e sem pontos) ----------
+function topoSimples() {
+  return `<header class="topo" style="justify-content:center"><div class="logo" style="font-size:${MOBILE ? 30 : 36}px">ELEMENTAR<span class="sim">118</span></div></header>`;
+}
+Object.assign(TELAS, {
+  'final-menu'() {
+    return `<main class="menu">
+      <div class="logo">ELEMENTAR<span class="sim">118</span></div>
+      <p class="slogan">Quantos dos <b>118 elementos</b> você lembra<br>antes do tempo acabar?</p>
+      <div class="botoes">
+        <div class="botao primario grande">${ICONES.play} Iniciar jogo</div>
+        <div class="botao grande">${ICONES.trofeu} Ranking</div>
+        <div class="botao grande fantasma">${ICONES.ajuda} Como jogar</div>
+      </div>
+    </main>
+    <footer style="text-align:center;padding:0 12px 22px;color:var(--texto-suave);font-weight:300;font-size:${MOBILE ? 11 : 13}px">
+      Theo Simão Lonkoski · Heloyse Angelina Ferreira${MOBILE ? '<br>' : ' — '}UTFPR Campo Mourão</footer>`;
+  },
+  'final-jogo'() {
+    const hud = `<section class="hud">
+      <div class="stat tempo"><small>Tempo</small><b>08:37</b></div>
+      <div class="stat"><small>Acertos</small><b>47<span style="font-size:.6em;color:var(--texto-suave)">/118</span></b></div>
+      <div class="stat"><small>Dificuldade</small><b style="font-size:${MOBILE ? 18 : 22}px">Normal</b></div>
+    </section>`;
+    return topoSimples() + hud + entrada() + areaTabela({ certos: PARTIDA_MEIO, novo: 79 }) +
+      toast('certo', '+1', 'Acertou! Ouro (Au)', MOBILE ? 262 : 236);
+  },
+  'final-ranking'() {
+    const linhas = [
+      ['Ana', 118, '09:42', '01/10/2026'], ['Pedro', 118, '11:05', '30/09/2026'], ['Julia', 99, '12:00', '29/09/2026'],
+      ['Lucas', 86, '12:00', '29/09/2026'], ['Marina', 77, '12:00', '28/09/2026'], ['Rafa', 65, '12:00', '27/09/2026'],
+      ['Bia', 58, '12:00', '27/09/2026'], ['Theo', 49, '12:00', '26/09/2026'],
+    ];
+    const tr = linhas.map(([n, ac, t, d], i) => `<tr class="${i === 0 ? 'voce' : ''}">
+      <td>${i < 3 ? `<span class="pos p${i + 1}">${i + 1}</span>` : i + 1}</td><td>${n}</td>
+      <td class="num">${ac}/118</td><td class="num">${t}</td>${MOBILE ? '' : `<td class="num">${d}</td>`}</tr>`).join('');
+    return topoSimples() + `<main class="pagina">
+      <h1>Ranking</h1>
+      <div class="segmento" style="margin-bottom:12px"><span>Fácil</span><span class="sel">Normal</span><span>Difícil</span></div>
+      <table class="ranking">
+        <tr><th>#</th><th>Jogador</th><th class="num">Acertos</th><th class="num">Tempo</th>${MOBILE ? '' : '<th class="num">Data</th>'}</tr>
+        ${tr}
+      </table>
+      <p style="text-align:center;color:var(--texto-suave);font-size:13px;margin-top:10px">Ordenado por acertos. Empate: quem terminou mais rápido.</p>
+      <div class="acoes" style="margin-top:auto;padding-top:14px">
+        <div class="botao primario">${ICONES.play} Jogar</div>
+        <div class="botao fantasma">${ICONES.casa} Menu</div>
+      </div>
+    </main>`;
+  },
+});
+
 // ---------- Montagem ----------
 document.title = `ELEMENTAR 118 · ${TELA}`;
 const frame = document.createElement('div');
