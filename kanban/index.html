@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Kanban · Elementar 118</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Mitr:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --preto:#050505;--painel:#0d0d0d;--celula:#121212;--borda:#232323;
+  --texto:#f4f4f6;--suave:#9a9a9f;--marca:#3faa62;--neon:#86f0a4;
+  --extra:#d3ad69;--doc:#7aa7e8;--erro:#e2685f;--raio:10px;
+}
+*{box-sizing:border-box;margin:0}
+body{font-family:'Mitr',system-ui,sans-serif;background:var(--preto);color:var(--texto);min-height:100vh;
+  padding:20px 16px 40px;font-size:14px}
+header{max-width:1400px;margin:0 auto 18px;display:flex;flex-wrap:wrap;gap:14px;align-items:flex-end;justify-content:space-between}
+h1{font-size:24px;font-weight:600}h1 span{color:var(--neon)}
+.sub{color:var(--suave);font-size:13px;margin-top:2px}
+.acoes{display:flex;gap:8px;flex-wrap:wrap}
+button,select{font-family:inherit;font-size:13px;color:var(--texto);background:var(--celula);border:1px solid var(--borda);
+  border-radius:8px;padding:7px 12px;cursor:pointer}
+button:hover{border-color:var(--marca);color:var(--neon)}
+.progresso{max-width:1400px;margin:0 auto 18px;background:var(--painel);border:1px solid var(--borda);border-radius:var(--raio);padding:12px 14px}
+.barra{height:8px;background:var(--celula);border-radius:99px;overflow:hidden;margin-top:8px}
+.barra i{display:block;height:100%;background:linear-gradient(90deg,#2f8a46,var(--neon));width:0;transition:width .3s}
+.stats{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:13px;color:var(--suave)}
+.stats b{color:var(--texto);font-weight:500}
+.quadro{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:repeat(5,minmax(230px,1fr));gap:12px;overflow-x:auto;padding-bottom:8px}
+.col{background:var(--painel);border:1px solid var(--borda);border-radius:var(--raio);padding:10px;min-height:200px;display:flex;flex-direction:column;gap:8px}
+.col.sobre{border-color:var(--neon);box-shadow:0 0 0 1px var(--neon) inset}
+.col h2{font-size:13px;font-weight:500;color:var(--suave);display:flex;justify-content:space-between;text-transform:uppercase;letter-spacing:.04em}
+.col h2 em{font-style:normal;color:var(--neon)}
+.card{background:var(--celula);border:1px solid var(--borda);border-left:3px solid var(--marca);border-radius:8px;padding:9px 10px;cursor:grab}
+.card:hover{border-color:var(--marca)}
+.card.extra{border-left-color:var(--extra)}.card.doc{border-left-color:var(--doc)}
+.card.arrastando{opacity:.4}
+.topo{display:flex;justify-content:space-between;gap:6px;font-size:11px;color:var(--suave);margin-bottom:4px}
+.id{color:var(--neon)}.card.extra .id{color:var(--extra)}.card.doc .id{color:var(--doc)}
+.titulo{line-height:1.35;font-size:13px}
+.rodape{display:flex;justify-content:space-between;align-items:center;gap:6px;margin-top:8px;font-size:11px;color:var(--suave)}
+.atrasado{color:var(--erro)}
+.rodape select{padding:3px 4px;font-size:11px;max-width:120px}
+.rodape a{color:var(--suave)}
+.x{background:none;border:0;padding:0 4px;color:var(--suave);font-size:14px}
+.x:hover{color:var(--erro)}
+.legenda{max-width:1400px;margin:14px auto 0;color:var(--suave);font-size:12px;line-height:1.6}
+.legenda i{display:inline-block;width:10px;height:10px;border-radius:2px;margin:0 4px 0 10px;vertical-align:-1px}
+dialog{background:var(--painel);color:var(--texto);border:1px solid var(--borda);border-radius:var(--raio);padding:18px;width:min(420px,92vw)}
+dialog::backdrop{background:#000a}
+dialog label{display:block;font-size:12px;color:var(--suave);margin:10px 0 4px}
+dialog input,dialog select{width:100%;font-family:inherit;font-size:14px;color:var(--texto);background:var(--celula);border:1px solid var(--borda);border-radius:8px;padding:8px}
+dialog .linha{display:flex;gap:8px;justify-content:flex-end;margin-top:16px}
+@media (max-width:900px){.quadro{grid-template-columns:repeat(5,260px)}}
+</style>
+</head>
+<body>
+<header>
+  <div>
+    <h1>Elementar <span>118</span> · Kanban</h1>
+    <p class="sub">Análise e Projeto de Sistemas (TI23L) · Theo Simão Lonkoski e Heloyse Angelina Ferreira · Entrega final: 03/12/2026</p>
+  </div>
+  <div class="acoes">
+    <button id="novo">+ Novo cartão</button>
+    <button id="exportar">Exportar</button>
+    <button id="reset">Restaurar</button>
+  </div>
+</header>
+
+<section class="progresso">
+  <div class="stats">
+    <span><b id="feitos">0</b> de <b id="total">0</b> cartões concluídos (<b id="pct">0%</b>)</span>
+    <span id="dias"></span>
+  </div>
+  <div class="barra"><i id="barra"></i></div>
+</section>
+
+<main class="quadro" id="quadro"></main>
+
+<p class="legenda">
+  <i style="background:var(--marca)"></i>Obrigatório
+  <i style="background:var(--extra)"></i>Extra (pontuação adicional)
+  <i style="background:var(--doc)"></i>Documento / entrega<br>
+  Arraste os cartões entre as colunas (ou use o seletor de cada cartão no celular). O quadro fica salvo neste navegador;
+  para compartilhar o progresso com a equipe, use <b>Exportar</b> e atualize <code>kanban/cards.js</code> no repositório.
+</p>
+
+<dialog id="dlg">
+  <form method="dialog" id="form">
+    <h2 style="font-size:16px;font-weight:500">Novo cartão</h2>
+    <label for="f-titulo">Título</label><input id="f-titulo" required maxlength="120">
+    <label for="f-tipo">Tipo</label>
+    <select id="f-tipo"><option value="obrigatorio">Obrigatório</option><option value="extra">Extra</option><option value="doc">Documento</option></select>
+    <label for="f-prazo">Prazo (opcional)</label><input id="f-prazo" type="date">
+    <div class="linha"><button type="button" id="cancelar">Cancelar</button><button type="submit" id="salvar">Adicionar</button></div>
+  </form>
+</dialog>
+
+<script src="cards.js"></script>
+<script>
+const COLUNAS = [["backlog","Backlog"],["todo","A fazer"],["doing","Em andamento"],["review","Em revisão"],["done","Concluído"]];
+const CHAVE = "elementar118-kanban";
+let cards;
+
+function carregar(){
+  try{
+    const s = JSON.parse(localStorage.getItem(CHAVE));
+    if(s && s.versao === window.KANBAN_VERSAO && Array.isArray(s.cards)) return s.cards;
+  }catch(e){}
+  return structuredClone(window.KANBAN_CARDS);
+}
+function salvar(){
+  try{ localStorage.setItem(CHAVE, JSON.stringify({versao: window.KANBAN_VERSAO, cards})); }catch(e){}
+  desenhar();
+}
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const hoje = () => { const d = new Date(); d.setHours(0,0,0,0); return d; };
+const fmt = iso => iso.split("-").reverse().slice(0,2).join("/");
+
+function desenhar(){
+  const q = document.getElementById("quadro");
+  q.innerHTML = "";
+  for(const [chave, nome] of COLUNAS){
+    const lista = cards.filter(c => c.col === chave);
+    const col = document.createElement("section");
+    col.className = "col"; col.dataset.col = chave;
+    col.innerHTML = `<h2>${nome}<em>${lista.length}</em></h2>`;
+    col.addEventListener("dragover", e => { e.preventDefault(); col.classList.add("sobre"); });
+    col.addEventListener("dragleave", () => col.classList.remove("sobre"));
+    col.addEventListener("drop", e => {
+      e.preventDefault(); col.classList.remove("sobre");
+      mover(e.dataTransfer.getData("text/plain"), chave);
+    });
+    for(const c of lista){
+      const atrasado = c.prazo && c.col !== "done" && new Date(c.prazo + "T23:59") < hoje();
+      const el = document.createElement("article");
+      el.className = "card " + c.tipo; el.draggable = true;
+      el.innerHTML = `
+        <div class="topo"><span class="id">${esc(c.id)}</span><button class="x" title="Remover" aria-label="Remover">×</button></div>
+        <div class="titulo">${esc(c.titulo)}</div>
+        <div class="rodape">
+          <span class="${atrasado ? "atrasado" : ""}">${c.prazo ? "até " + fmt(c.prazo) : ""}</span>
+          <select aria-label="Mover para">${COLUNAS.map(([k,n]) => `<option value="${k}" ${k===c.col?"selected":""}>${n}</option>`).join("")}</select>
+        </div>`;
+      el.addEventListener("dragstart", e => { e.dataTransfer.setData("text/plain", c.id); el.classList.add("arrastando"); });
+      el.addEventListener("dragend", () => el.classList.remove("arrastando"));
+      el.querySelector("select").addEventListener("change", e => mover(c.id, e.target.value));
+      el.querySelector(".x").addEventListener("click", () => {
+        if(confirm(`Remover "${c.titulo}"?`)){ cards = cards.filter(x => x.id !== c.id); salvar(); }
+      });
+      col.appendChild(el);
+    }
+    q.appendChild(col);
+  }
+  const feitos = cards.filter(c => c.col === "done").length;
+  const pct = cards.length ? Math.round(feitos / cards.length * 100) : 0;
+  feitos_.textContent = feitos; total_.textContent = cards.length; pct_.textContent = pct + "%";
+  barra.style.width = pct + "%";
+  const dias = Math.ceil((new Date("2026-12-03T23:59") - new Date()) / 864e5);
+  dias_.textContent = dias > 0 ? `${dias} dia${dias>1?"s":""} para a entrega final (03/12)` : "Prazo da entrega final encerrado";
+}
+const feitos_ = document.getElementById("feitos"), total_ = document.getElementById("total"),
+      pct_ = document.getElementById("pct"), barra = document.getElementById("barra"), dias_ = document.getElementById("dias");
+
+function mover(id, col){
+  const c = cards.find(x => x.id === id);
+  if(c && c.col !== col){ c.col = col; salvar(); }
+}
+
+const dlg = document.getElementById("dlg");
+document.getElementById("novo").onclick = () => { form.reset(); dlg.showModal(); document.getElementById("f-titulo").focus(); };
+document.getElementById("cancelar").onclick = () => dlg.close();
+document.getElementById("form").addEventListener("submit", () => {
+  const n = cards.filter(c => c.id.startsWith("N")).length + 1;
+  cards.push({ id: "N" + String(n).padStart(2,"0"), titulo: document.getElementById("f-titulo").value.trim(),
+    tipo: document.getElementById("f-tipo").value, col: "todo", prazo: document.getElementById("f-prazo").value || undefined });
+  salvar();
+});
+document.getElementById("reset").onclick = () => {
+  if(confirm("Voltar ao quadro original do repositório? As mudanças feitas neste navegador serão perdidas.")){
+    try{ localStorage.removeItem(CHAVE); }catch(e){}
+    cards = structuredClone(window.KANBAN_CARDS); desenhar();
+  }
+};
+document.getElementById("exportar").onclick = () => {
+  const txt = "window.KANBAN_VERSAO = " + (window.KANBAN_VERSAO + 1) + ";\nwindow.KANBAN_CARDS = " + JSON.stringify(cards, null, 2) + ";\n";
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(new Blob([txt], {type:"text/javascript"}));
+  a.download = "cards.js"; a.click();
+};
+
+cards = carregar();
+desenhar();
+</script>
+</body>
+</html>
