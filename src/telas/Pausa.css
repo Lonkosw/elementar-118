@@ -1,0 +1,5 @@
+/* Janela de pausa e de confirmação (também usada em Jogo.jsx). */
+
+.pausa-texto { color: var(--suave); font-weight: 300; line-height: 1.5; font-size: 15px; }
+.pausa-botoes { display: flex; flex-direction: column; gap: 10px; margin-top: 18px; }
+.pausa-botoes .botao { height: 52px; }

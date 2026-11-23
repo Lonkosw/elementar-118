@@ -1,0 +1,23 @@
+/* Mensagens de feedback (toasts). A área tem altura fixa para o layout não pular. */
+
+.avisos {
+  min-height: 40px; display: flex; flex-direction: column; align-items: center; gap: 6px;
+}
+.toast {
+  display: flex; align-items: center; gap: 10px; padding: 7px 16px 7px 8px; border-radius: 999px;
+  background: var(--toast-fundo); color: var(--toast-texto); font-size: 15px;
+  animation: entrar 0.2s ease-out;
+}
+.toast .tag {
+  background: var(--marca-grad); color: #fff; font-weight: 600; border-radius: 999px;
+  padding: 2px 10px; min-width: 30px; text-align: center;
+}
+.toast.repetido .tag { background: var(--repetido); }
+.toast.erro .tag { background: var(--erro); }
+.toast.nivel .tag { background: #e3c171; color: #111; }
+.toast.conquista .tag { background: #7aa7e8; color: #111; }
+@keyframes entrar { from { opacity: 0; transform: translateY(-6px); } }
+
+@media (max-width: 720px) {
+  .toast { font-size: 14px; }
+}

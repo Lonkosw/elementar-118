@@ -1,0 +1,22 @@
+/* Tela de conquistas. */
+
+.pagina.larga { max-width: 980px; width: 100%; margin: 0 auto; }
+.progresso { color: var(--suave); margin-top: -8px; }
+
+.conquistas { list-style: none; width: 100%; display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 10px; }
+.conquista {
+  display: flex; align-items: center; gap: 14px; padding: 14px;
+  background: var(--celula); border: 1px solid rgba(var(--glow), 0.55); border-radius: var(--raio);
+  box-shadow: 0 0 12px rgba(var(--glow), 0.15);
+}
+.conquista b { display: block; font-weight: 500; }
+.conquista small { color: var(--suave); font-weight: 300; font-size: 13px; line-height: 1.4; }
+.medalha {
+  flex: none; width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center;
+  background: var(--marca-grad); color: #fff;
+}
+.medalha svg { width: 22px; height: 22px; }
+
+/* Bloqueada: apagada e com cadeado */
+.conquista.bloqueada { border-color: var(--celula-borda); box-shadow: none; opacity: 0.6; }
+.conquista.bloqueada .medalha { background: var(--painel); border: 1px solid var(--celula-borda); color: var(--suave); }

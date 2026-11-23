@@ -1,0 +1,132 @@
+/*
+ * ESTILOS GLOBAIS · variáveis de cor (tema escuro e claro), base da página e layout.
+ * O visual vem do protótipo prototipo-neon/index.html (fonte Mitr, verde e neon).
+ * Cada componente tem o seu próprio .css ao lado do arquivo .jsx.
+ */
+
+/* ===== 1. VARIÁVEIS DE COR ===== */
+
+:root {
+  color-scheme: dark;
+  --preto: #050505;            /* fundo da página */
+  --celula: #121212;           /* fundo das casas e botões */
+  --celula-borda: #232323;
+  --painel: #0d0d0d;           /* fundo de caixas */
+  --texto: #f4f4f6;
+  --suave: #9a9a9f;            /* texto secundário */
+  --marca: #3faa62;            /* verde dos quadrados */
+  --marca-grad: linear-gradient(135deg, #4cb86f 0%, #2f8a46 55%, #1f4f1c 100%);
+  --neon: #86f0a4;             /* núcleo do neon */
+  --glow: 63, 170, 98;         /* rgb da marca, usado nos brilhos */
+  --repetido: #d3ad69;
+  --erro: #e2685f;
+  --numero: #5d5d62;           /* número atômico na casa */
+  --nome-certo: #c2e2cb;
+  --toast-fundo: #f4f4f6;
+  --toast-texto: #111;
+  --modal-fundo: rgba(0, 0, 0, 0.7);
+  --raio: 10px;
+}
+
+/* Tema claro (extra) */
+:root[data-tema='claro'] {
+  color-scheme: light;
+  --preto: #eef3ee;
+  --celula: #ffffff;
+  --celula-borda: #cfd8d1;
+  --painel: #ffffff;
+  --texto: #10201a;
+  --suave: #566259;
+  --marca: #2f8a46;
+  --marca-grad: linear-gradient(135deg, #3fa860 0%, #2f8a46 55%, #226a34 100%);
+  --neon: #1c7a3c;
+  --glow: 47, 138, 70;
+  --repetido: #a9791a;
+  --erro: #c0392b;
+  --numero: #8a958d;
+  --nome-certo: #1f5a31;
+  --toast-fundo: #10201a;
+  --toast-texto: #f4f4f6;
+  --modal-fundo: rgba(20, 32, 26, 0.55);
+}
+
+/* Na partida o fundo fica um pouco mais claro (como no protótipo) */
+:root[data-tela='jogo'] { --preto: #121813; }
+:root[data-tema='claro'][data-tela='jogo'] { --preto: #e4ece5; }
+
+/* ===== 2. BASE ===== */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+[hidden] { display: none !important; }
+
+html, body, #raiz { height: 100%; }
+
+body {
+  font-family: 'Mitr', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  background: var(--preto);
+  color: var(--texto);
+  overflow: hidden;
+}
+
+button, input { font-family: inherit; }
+
+/* ===== 3. LAYOUT: o cabeçalho em cima e a tela ocupando o resto ===== */
+
+.app {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+.tela {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Página simples (ranking e conquistas) */
+.pagina {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 6px 20px 30px;
+  overflow: auto;
+}
+.pagina h1 { font-weight: 600; font-size: 34px; }
+.pagina .acoes { display: flex; gap: 12px; }
+.pagina .acoes .botao { padding: 0 26px; height: 52px; }
+
+/* Caixinhas de número (placar e resultado) */
+.stat {
+  min-width: 132px;
+  padding: 9px 16px;
+  border-radius: var(--raio);
+  background: var(--painel);
+  border: 1px solid var(--celula-borda);
+  text-align: center;
+}
+.stat small { display: block; font-size: 12px; color: var(--suave); font-weight: 400; }
+.stat b { font-size: 24px; font-weight: 600; font-variant-numeric: tabular-nums; }
+.stat .total { font-size: 0.6em; color: var(--suave); }
+.stat .dificuldade { font-size: 20px; }
+
+@media (max-width: 720px) {
+  .pagina h1 { font-size: 28px; }
+  .pagina .acoes { width: 100%; }
+  .pagina .acoes .botao { flex: 1; }
+  .stat { min-width: 0; flex: 1; padding: 7px 8px; }
+  .stat b { font-size: 19px; }
+  .stat small { font-size: 11px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation-duration: 0.01ms !important; }
+}

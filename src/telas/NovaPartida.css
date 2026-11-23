@@ -1,0 +1,24 @@
+/* Janela "Nova partida": nome e dificuldade. */
+
+.nova-partida { display: flex; flex-direction: column; gap: 8px; }
+.nova-partida label, .nova-partida .rotulo { font-size: 13px; color: var(--suave); margin-top: 6px; }
+.nova-partida input {
+  height: 50px; border-radius: var(--raio); background: var(--celula); border: 1.5px solid var(--celula-borda);
+  color: var(--texto); font-size: 17px; padding: 0 16px;
+}
+.nova-partida input:focus { outline: none; border-color: var(--marca); box-shadow: 0 0 12px rgba(var(--glow), 0.4); }
+
+.dificuldades { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.opcao {
+  display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 12px 6px; cursor: pointer;
+  border-radius: var(--raio); background: var(--celula); border: 1.5px solid var(--celula-borda); color: var(--texto);
+  transition: box-shadow 0.2s, border-color 0.2s, background 0.2s;
+}
+.opcao b { font-weight: 500; font-size: 16px; }
+.opcao small { color: var(--suave); font-size: 13px; font-variant-numeric: tabular-nums; }
+.opcao:hover, .opcao:focus-visible { outline: none; border-color: var(--marca); }
+.opcao.sel {
+  background: rgba(var(--glow), 0.16); border-color: var(--neon);
+  box-shadow: 0 0 12px rgba(var(--glow), 0.4), inset 0 0 0 1px rgba(var(--glow), 0.5);
+}
+.opcao.sel b { color: var(--neon); }

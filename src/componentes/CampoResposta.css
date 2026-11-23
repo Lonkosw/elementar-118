@@ -1,0 +1,24 @@
+/* Campo de resposta com brilho verde. */
+
+.entrada { display: flex; gap: 10px; width: min(620px, 100%); }
+.campo {
+  flex: 1; height: 56px; border-radius: var(--raio);
+  background: var(--painel); border: 1.5px solid var(--marca);
+  color: var(--texto); font-size: 18px; padding: 0 18px;
+  box-shadow: 0 0 12px rgba(var(--glow), 0.35), inset 0 0 10px rgba(var(--glow), 0.08);
+}
+.campo::placeholder { color: var(--suave); opacity: 0.7; }
+.campo:focus { outline: none; box-shadow: 0 0 16px rgba(var(--glow), 0.6), inset 0 0 12px rgba(var(--glow), 0.12); }
+.campo:disabled { opacity: 0.5; }
+.entrada .botao { height: 56px; padding: 0 22px; }
+
+/* Resposta que não existe: o campo treme */
+.campo.treme { animation: tremer 0.4s; border-color: var(--erro); }
+@keyframes tremer {
+  20%, 60% { transform: translateX(-7px); }
+  40%, 80% { transform: translateX(7px); }
+}
+
+@media (max-width: 720px) {
+  .entrada .botao span { display: none; }
+}

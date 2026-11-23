@@ -1,0 +1,16 @@
+/* Placar do topo da partida. */
+
+.placar { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.hud { display: flex; gap: 12px; }
+.stat.tempo b { color: var(--neon); text-shadow: 0 0 10px rgba(var(--glow), 0.7); }
+
+/* Menos de 1 minuto: cronômetro muda de cor e pulsa */
+.stat.tempo.critico { border-color: var(--erro); }
+.stat.tempo.critico b { color: var(--erro); text-shadow: 0 0 10px var(--erro); animation: pulsar 1s ease-in-out infinite; }
+@keyframes pulsar { 50% { opacity: 0.55; } }
+
+.aviso-tempo { color: var(--erro); font-size: 14px; font-weight: 500; }
+
+@media (max-width: 720px) {
+  .hud { width: 100%; }
+}

@@ -1,0 +1,18 @@
+/* Logotipo: o 118 vira um quadradinho de elemento com brilho. */
+
+.logo {
+  font-size: 30px; font-weight: 600; letter-spacing: -0.01em;
+  display: inline-flex; align-items: center; gap: 0.25em; line-height: 1; white-space: nowrap;
+}
+.logo.grande { font-size: clamp(32px, 9.5vw, 88px); }
+.logo .sim {
+  font-size: 0.72em; color: #fff; background: var(--marca-grad);
+  border: 0.04em solid rgba(255, 255, 255, 0.85); border-radius: 0.06em;
+  padding: 0.12em 0.22em 0.08em;
+  box-shadow: 0 0 0.35em rgba(var(--glow), 0.8), 0 0 1.1em rgba(var(--glow), 0.35);
+}
+
+@media (max-width: 720px) {
+  .logo { font-size: 21px; }
+  .logo.grande { font-size: clamp(32px, 9.5vw, 88px); }
+}

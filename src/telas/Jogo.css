@@ -1,0 +1,14 @@
+/* Tela da partida. Rola na vertical quando o resultado empurra a tabela para baixo. */
+
+.jogo {
+  flex: 1; min-height: 0; display: flex; flex-direction: column; align-items: center; gap: 14px;
+  padding: 0 20px 24px; overflow-y: auto;
+}
+.controles { display: flex; gap: 10px; }
+.controles .botao { height: 42px; font-size: 15px; padding: 0 18px; }
+.dica-mob { display: none; color: var(--suave); font-size: 12px; text-align: center; }
+
+@media (max-width: 720px) {
+  .jogo { gap: 12px; padding-left: 16px; padding-right: 16px; }
+  .dica-mob { display: block; }
+}
