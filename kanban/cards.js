@@ -1,7 +1,7 @@
 // Fonte dos cartões do quadro. Para atualizar o progresso da equipe: edite "col" e faça commit.
 // Colunas: backlog | todo | doing | review | done
 // tipo: obrigatorio | extra | doc
-window.KANBAN_VERSAO = 2; // aumente ao mudar este arquivo para sobrepor o que estiver salvo no navegador
+window.KANBAN_VERSAO = 3; // aumente ao mudar este arquivo para sobrepor o que estiver salvo no navegador
 window.KANBAN_CARDS = [
   // ---- 3º bimestre (entregue em 01/10/2026) ----
   { id: "D01", titulo: "Diagrama de casos de uso (include/extend)", tipo: "doc", col: "done", prazo: "2026-10-01", ref: "docs/casos-de-uso.md" },
@@ -20,10 +20,10 @@ window.KANBAN_CARDS = [
   { id: "HU07", titulo: "Pausar partida (Continuar, Reiniciar, Menu)", tipo: "obrigatorio", col: "done", prazo: "2026-12-03" },
   { id: "HU08", titulo: "Desistir com confirmação", tipo: "obrigatorio", col: "done", prazo: "2026-12-03" },
   { id: "HU09", titulo: "Encerrar partida: vitória, derrota e faltantes destacados", tipo: "obrigatorio", col: "done", prazo: "2026-12-03" },
-  { id: "HU13", titulo: "Salvar resultado no localStorage", tipo: "obrigatorio", col: "doing", prazo: "2026-12-03" },
+  { id: "HU13", titulo: "Salvar resultado no localStorage", tipo: "obrigatorio", col: "done", prazo: "2026-12-03" },
   { id: "HU10", titulo: "Ranking top 10 por dificuldade", tipo: "obrigatorio", col: "done", prazo: "2026-12-03" },
-  { id: "HU14", titulo: "Jogar novamente / voltar ao menu sem recarregar", tipo: "obrigatorio", col: "doing", prazo: "2026-12-03" },
-  { id: "HU15", titulo: "Responsividade a partir de 360 px", tipo: "obrigatorio", col: "doing", prazo: "2026-12-03" },
+  { id: "HU14", titulo: "Jogar novamente / voltar ao menu sem recarregar", tipo: "obrigatorio", col: "done", prazo: "2026-12-03" },
+  { id: "HU15", titulo: "Responsividade a partir de 360 px", tipo: "obrigatorio", col: "done", prazo: "2026-12-03" },
   { id: "HU03", titulo: "Selecionar dificuldade (15:00 / 12:00 / 10:00)", tipo: "extra", col: "done", prazo: "2026-12-03" },
   { id: "HU11", titulo: "Tela de conquistas", tipo: "extra", col: "backlog" },
   { id: "HU12", titulo: "Desbloquear conquistas durante a partida", tipo: "extra", col: "backlog" },
