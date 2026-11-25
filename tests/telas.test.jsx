@@ -294,7 +294,7 @@ describe('UC04 <<include>> UC09 · Encerrar partida (HU09)', () => {
     expect(screen.getByText('118', { selector: 'b' })).toBeInTheDocument();
     expect(screen.getByText('Novo recorde!')).toBeInTheDocument();
     expect(document.querySelectorAll('.casa.faltou')).toHaveLength(0);
-  });
+  }, 30000); // digita os 118 elementos; em máquina lenta passa dos 5 s padrão
 
   it('HU09: "Novo recorde!" só aparece quando supera o melhor resultado do jogador', () => {
     abrirJogo();
