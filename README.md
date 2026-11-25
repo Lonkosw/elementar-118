@@ -35,7 +35,7 @@ Projeto de Análise e Projeto de Sistemas (TI23L), UTFPR Campo Mourão, 2º seme
 | Feedback (acertou, errou, subiu de nível, fim de jogo) | Tela Gameplay · UC05, UC06, UC09 |
 | Jogar novamente e voltar ao menu | UC14 |
 | Responsividade | 3 telas em desktop (1440×900) e celular (390×844) |
-| **Extras:** níveis de dificuldade e conquistas | UC03, UC11, UC12 |
+| **Extras:** níveis de dificuldade, conquistas e tema claro/escuro | UC03, UC11, UC12 |
 | Diagrama de casos de uso com `<<include>>` e `<<extend>>` | [docs/casos-de-uso.md](docs/casos-de-uso.md) |
 | Histórias de usuário | [docs/historias-de-usuario.md](docs/historias-de-usuario.md) · [.txt](docs/historias-de-usuario.txt) |
 | Kanban no Trello | *link do quadro em breve* |
@@ -55,23 +55,62 @@ Os protótipos oficiais são as 3 telas abaixo, em desktop e celular
 Visual: fundo preto com textura, verde dos quadrados de elemento e neon ao passar o mouse.
 Fonte **Mitr** (Google Fonts).
 
-## Estrutura
+## Como rodar
 
-```
-elementar-118/
-├── README.md
-├── docs/
-│   ├── casos-de-uso.png        diagrama de casos de uso (Visual Paradigm)
-│   ├── casos-de-uso.puml       mesmo diagrama em PlantUML
-│   ├── casos-de-uso.md         include/extend justificados e descrição dos casos
-│   ├── historias-de-usuario.md / .txt
-│   └── kanban-trello.md        planejamento por história
-├── prototipo-neon/             protótipo visual navegável (3 telas)
-├── prototipos/
-│   └── neon/                   PNGs das 3 telas em desktop e celular
-└── prototipo/
-    └── elementos.js            dados dos 118 elementos
+Precisa do [Node.js](https://nodejs.org) 20 ou mais novo.
+
+```bash
+npm install      # instala as dependências
+npm run dev      # abre o jogo em http://localhost:5173
+npm test         # roda os testes automáticos
+npm run build    # gera a versão final na pasta dist/
 ```
 
-`prototipo/elementos.js` traz os 118 elementos e a função `normalizar()`, que serão reaproveitados
-no código do jogo no 4º bimestre.
+Tecnologias: **React + JavaScript** (Vite), CSS puro e `localStorage`. Sem biblioteca de rotas nem de estado.
+
+## Estrutura do código
+
+O código é dividido em camadas. A regra é: a **lógica** não conhece o React, e os **componentes**
+não têm regra de negócio.
+
+```
+src/
+├── dados/          elementos (118 + posição na grade), dificuldades, conquistas
+├── logica/         regras do jogo em funções puras: validarResposta, placar, partida, ranking, conquistas
+├── armazenamento/  único arquivo que lê e escreve no localStorage
+├── hooks/          usePartida (liga a lógica à tela), useCronometro, useTema, useTemporario
+├── componentes/    peças reutilizáveis: TabelaPeriodica, Placar, CampoResposta, Avisos, Modal...
+├── telas/          Menu, NovaPartida, ComoJogar, Jogo, Pausa, Ranking, Conquistas
+├── estilos/        global.css (cores dos temas escuro e claro)
+├── App.jsx         escolhe a tela atual
+└── main.jsx
+tests/              testes automáticos (ver abaixo)
+docs/               diagrama de casos de uso e histórias de usuário
+prototipo-neon/     protótipo visual de referência (oficial)
+```
+
+Cada arquivo começa com um comentário dizendo o que faz e quem o usa.
+
+## Testes automáticos
+
+`npm test` roda mais de 150 testes e também confere o código contra os documentos:
+
+| Arquivo | O que verifica |
+|---|---|
+| `dados`, `validarResposta`, `placar`, `partida`, `ranking`, `conquistas` | Regras do jogo (HU02 a HU13) |
+| `telas.test.jsx` | O jogador usando o jogo de verdade, uma história por vez (HU01 a HU14) |
+| `responsividade.test.js` | Regras de CSS do celular (HU15) |
+| `documentacao.test.js` | Toda HU e todo UC têm teste; cada `<<include>>`/`<<extend>>` do diagrama tem teste; tempos e mensagens das histórias existem no código; elementos, posições, textos e cores são iguais aos do protótipo |
+
+O nome de cada teste começa com o ID da história (`HU05: ...`) e cada grupo com o caso de uso
+(`UC04 <<include>> UC05`), o que liga código, testes e documentação.
+
+## Extras implementados
+
+Níveis de dificuldade (UC03), conquistas (UC11 e UC12) e tema claro/escuro.
+
+## Pastas de apoio
+
+`prototipo/elementos.js` é a primeira versão dos dados dos elementos, usada na prototipação.
+O jogo usa `src/dados/elementos.js`, com as mesmas informações e a posição de cada elemento igual
+à do protótipo neon (conferida por teste).
